@@ -1,3 +1,5 @@
+# Un movimiento es válido cuando la posición de la fila y columna es mayor o igual a 0 y menor que el número máximo
+# en 3x3, serían válidas desde la 0,0 hasta la 2,2 siempre que haya un .
 def is_valid_move(row, col, labyrinth):
     rows = len(labyrinth)
     cols = len(labyrinth[0])
@@ -5,6 +7,9 @@ def is_valid_move(row, col, labyrinth):
         return True
     return False
 
+# Se puede rotar el rod, asumiendo derecha y abajo de posibles movimientos, 
+# cuando el cuadro de 3x3 está libre desde el centro en el que estás,es decir,
+# todas las posiciones son válidas
 def can_rotate(row, col, direction, labyrinth):
     directions = [(0, 1), (1, 0)]  # Right, Down
     for i in range(row - 1, row + 2):
@@ -13,6 +18,7 @@ def can_rotate(row, col, direction, labyrinth):
                 return False
     return True
 
+# Rota el rod si está horizontal y lo pasa a vertical o viceversa
 def rotate(row, col, direction, labyrinth):
     if direction == 0:  # Horizontal
         if is_valid_move(row - 1, col, labyrinth) and is_valid_move(row + 1, col, labyrinth):
